@@ -1,0 +1,7 @@
+﻿bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+screen_image.txt
