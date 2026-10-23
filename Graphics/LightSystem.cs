@@ -122,6 +122,20 @@ class LightSystem //управление всеми источниками св�
         FillColors();
     }
 
+    /*Мерцание ламп: яркость каждой лампы меняется по времени, фаза сдвинута от лампы к лампе*/
+    public void AnimateLamps(float time)
+    {
+        if (Config.LampPulseAmount <= 0f) return;
+        for (int i = 0; i < LampCount; i++)
+        {
+            float phase = i * Config.LampPulseWave;
+            float wave = 0.65f * MathF.Sin(time * Config.LampPulseSpeed + phase)
+                       + 0.35f * MathF.Sin(time * Config.LampPulseSpeed * 2.7f + phase * 1.9f);
+            colors[i] = Config.LampColor * (1f + Config.LampPulseAmount * wave);
+        }
+        FillColors();
+    }
+
     //Копирования цвета
     void FillColors()
     {

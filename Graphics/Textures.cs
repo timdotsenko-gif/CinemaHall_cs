@@ -10,11 +10,11 @@ static class Textures //утилиты ддля работы с текстура
     {
         using var fs = File.OpenRead(path); //открытие файла
         var img = ImageResult.FromStream(fs, ColorComponents.RedGreenBlueAlpha); //декодировка изображдения
-        
+
         /*Запись размеров*/
         width = img.Width;
         height = img.Height;
-        
+
         return img.Data; //возвращаем данные декодирвоания
     }
 
@@ -39,6 +39,15 @@ static class Textures //утилиты ддля работы с текстура
         return d;
     }
 
+    /*Замена содержимого существующей текстуры (для анимации, размер не меняется)*/
+    public static void Update(int tex, byte[] data, int w, int h)
+    {
+        GL.BindTexture(TextureTarget.Texture2D, tex);
+        GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, w, h,
+            PixelFormat.Rgba, PixelType.UnsignedByte, data);
+        GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+    }
+
     /*Создание OpenGL текстуры из массива RGBA и возращение её индефекеатора*/
     public static int Create(byte[] data, int w, int h)
     {
@@ -58,7 +67,7 @@ static class Textures //утилиты ддля работы с текстура
         //Обертка
         GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
         GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
-        
+
         //Максимальный уровень сглаживапния
         GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)0x84FE, 8f);
         return t;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -33,6 +33,7 @@
     <None Remove="model\f86c7163-8479-4266-8d14-30855d82e9e1.png" />
     <None Remove="model\model.mtl" />
     <None Remove="model\model.obj" />
+    <None Remove="model\screen.gif" />
     <None Remove="model\screen.jpg" />
   </ItemGroup>
 
@@ -111,6 +112,9 @@
     </Content>
     <Content Include="model\model.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="model\screen.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="model\screen.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

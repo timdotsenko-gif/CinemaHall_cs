@@ -16,7 +16,7 @@ static class Config
     public const float MouseSens = 0.05f; //чувсвтуительность мыши
 
     /*Координаты поялвения игрока*/
-    public const float SpawnX = -9.8f; 
+    public const float SpawnX = -9.8f;
     public const float SpawnZ = 0f;
     public const float SpawnYaw = 0f;
 
@@ -35,7 +35,7 @@ static class Config
     public const float BakedGain = 0.23f; //свет текстур
     public const float LampGain = 3.1f; //свет от ламп
     public const float ScreenGlow = 1.0f; //свет от экрана
-    
+
     /*Лампы и тени*/
     public static readonly string[] LampMaterials = { "603b676f" }; //материалы-лампы
     public static readonly string[] LampNames = { "cinema_stairlight" }; //меши-лампы
@@ -60,6 +60,17 @@ static class Config
     public const float ScreenLightRadius = 30f; //радиус действия света от экрана
     public const float ScreenLightShadowFar = 32f; //дальняя плоскость для теней от источников света экрана
     public const float ScreenLightFalloffDist = 6f; // расстояние, на котором затухание света экрана становится заметным
+
+    /*Анимация экрана*/
+    public const string ScreenFramesFolder = "screen_frames"; //папка с кадрами внутри model (кадры идут по порядку имён)
+    public const float ScreenFrameRate = 24f; //частота кадров для папки с кадрами (у gif своя задержка)
+    public const int ScreenAnimMaxSize = 1280; //макс. размер кадра в пикселях, большие уменьшаются вдвое
+    public const int ScreenAnimMemoryMB = 400; //лимит памяти под кадры анимации
+
+    /*Анимация ламп*/
+    public const float LampPulseAmount = 0.3f; //глубина мерцания ламп (0 - выключено)
+    public const float LampPulseSpeed = 2f; //скорость мерцания
+    public const float LampPulseWave = 0.6f; //сдвиг фазы между соседними лампами (бегущая волна)
 
     public static bool HideConsole = true; //скрытие консоли
 }

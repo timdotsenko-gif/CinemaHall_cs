@@ -15,6 +15,7 @@ class CinemaWindow : GameWindow //наследование от GameWindow
     LightSystem lights; //система источников цвета
     ScreenDisplay screen; //дисплей экроана зала
     Player player; // управление и камера игрока
+    float time; //время работы приложения (для анимации)
 
     public CinemaWindow(GameWindowSettings g, NativeWindowSettings n) : base(g, n) { } //контсруктор настройки предает в базоый цикл
 
@@ -73,6 +74,12 @@ class CinemaWindow : GameWindow //наследование от GameWindow
     protected override void OnRenderFrame(FrameEventArgs args) //вызов каждого кадра перед отрисовкой
     {
         base.OnRenderFrame(args); //вызов базовой реализации
+
+        float dt = MathF.Min((float)args.Time, 0.25f); //время кадра
+        time += dt;
+        lights.AnimateLamps(time); //мерцание ламп
+        screen.Update(dt); //смена кадров на экране
+
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit); //очистка буфера цвета и глубины
 
         /*перспектива окна*/
@@ -85,7 +92,7 @@ class CinemaWindow : GameWindow //наследование от GameWindow
     }
 
     /*Одновление размера окна*/
-    protected override void OnResize(ResizeEventArgs e) 
+    protected override void OnResize(ResizeEventArgs e)
     {
         base.OnResize(e);
         GL.Viewport(0, 0, e.Width, e.Height); //обновление области вывода OpenGL под новый размер окна
